@@ -57,7 +57,6 @@ bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #ifdef SHOW_KEYBOARD_DATA
 void OnPress(int key)
 {
-	Serial.print("key '");
 	switch (key)
   {
     case KEYD_UP       : Serial.print("UP"); break;
@@ -82,8 +81,16 @@ void OnPress(int key)
     case KEYD_F10      : Serial.print("F10"); break;
     case KEYD_F11      : Serial.print("F11"); break;
     case KEYD_F12      : Serial.print("F12"); break;
-    default: Serial.print((char)key); break;
+    default: 
+    {
+      Serial.print((char)key);
+      break;
+    } 
+    
 	}
-	Serial.println("'");
+  if((char)key == "\n" || (char)key == "\r")
+  {
+    Serial.println("");
+  }
 }
 #endif

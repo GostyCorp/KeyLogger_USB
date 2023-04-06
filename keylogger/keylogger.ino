@@ -86,24 +86,24 @@ void OnPress(int key) {
   int numSpecialKeys = sizeof(specialKeys)/sizeof(specialKeys[0]); // get the number of special keys
 
 
-  if((char)key == "\n" || (char)key == "\r")
+  if((char*)key == "\n" || (char*)key == "\r")
     Serial.println("");
     
   // Check if the key is not in the special keys list
   bool isSpecialKey = false;
   for (int i = 0; i < numSpecialKeys; i++) {
-    if (strcmp(specialKeys[i], key) == 0) {
+    if (strcmp(specialKeys[i], (char*)key) == 0) {
       isSpecialKey = true;
       break;
     }
   }
   
   if (!isSpecialKey) {
-     Keyboard.print((char)key);
-        dataLog.print((char)key);
+     Keyboard.print((char*)key);
+        dataLog.print((char*)key);
 
       // For the ouput for debugging
-      Serial.print((char)key);
+      Serial.print((char*)key);
       Serial.println(dataLog.size());
       uint64_t usedSize = SD.usedSize() / (1024 * 1024);
       Serial.print("Taille utilisée : ");

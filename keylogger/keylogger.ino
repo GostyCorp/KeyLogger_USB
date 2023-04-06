@@ -33,7 +33,6 @@ void setup()
 
 void loop()
 {
-  Keyboard.print("Hello World "); 
   myusb.Task();
 }
 
@@ -84,7 +83,11 @@ void OnPress(int key)
     case KEYD_F12      : Serial.print("F12"); break;
     default: 
     {
-      Serial.print((char)key);
+      if((char)key != "�")
+      {
+        Keyboard.print((char)key);
+        Serial.print((char)key);
+      }
       break;
     } 
     

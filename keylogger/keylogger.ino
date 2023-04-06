@@ -78,7 +78,7 @@ bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 void OnPress(int key) {
     static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
     static const char* specialKeys[] = {
-        "UP", "DN", "LEFT", "RIGHT", "Ins", "Del", "PUP",
+        "UP", "DN", "LEFT", "RIGHT", "Ins", "PUP",
         "PDN", "HOME", "END", "F1", "F2", "F3", "F4", "F5",
         "F6", "F7", "F8", "F9", "F10", "F11", "F12"
     };

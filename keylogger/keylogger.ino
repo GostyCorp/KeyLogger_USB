@@ -36,11 +36,7 @@ void setup() {
   if (!SD.begin(BUILTIN_SDCARD)){
     Serial.println("SD card failed, or not present");
     return;
-  }  
-    uint64_t cardSize = SD.totalSize() / (1024 * 1024);
-    Serial.print("Taille de la carte SD : ");
-    Serial.print(cardSize);
-    Serial.println(" Mo.");
+  }
 
   //Ouvrir le fichier de log de données
   dataLog = SD.open("dataLog.txt", FILE_WRITE);

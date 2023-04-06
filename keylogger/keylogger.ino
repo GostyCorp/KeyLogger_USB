@@ -85,9 +85,6 @@ void OnPress(int key) {
 
     int numSpecialKeys = sizeof(specialKeys) / sizeof(specialKeys[0]);
 
-    if (isCarriageReturnOrNewLine(key)) {
-        Serial.println("");
-    }
     else if (!isSpecialKey(key, specialKeys, numSpecialKeys)) {
         Keyboard.print((char)key);
         dataLog.print((char)key);
@@ -95,9 +92,6 @@ void OnPress(int key) {
     }
 }
 
-bool isCarriageReturnOrNewLine(int key) {
-    return key == '\n' || key == '\r';
-}
 
 bool isSpecialKey(int key, const char* specialKeys[], int numSpecialKeys) {
     for (int i = 0; i < numSpecialKeys; i++) {

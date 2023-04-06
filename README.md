@@ -76,26 +76,46 @@ The aim of a keylogger is to record all the keys pressed on a keyboard. This is 
 
 This project was built with the following technologies and libraries:
 
-<img src="https://img.shields.io/badge/Arduino-brightgreen.svg?style=plastic">
-<img src="https://img.shields.io/badge/Teensy-4.1-red.svg?style=plastic">
 
 
-
+<table>
+  <tr>
+    <td align="center" width="96">
+      <a href="#macropower-tech">
+        <img src="images/Arduino_Logo.svg.png" width="68" height="58" alt="C#" />
+      </a>
+      <br>Ardunio
+    </td>
+    <td align="center" width="96">
+      <a href="#macropower-tech">
+        <img src="images/teensy.png" width="68" height="48" alt="Python" />
+      </a>
+      <br>Teensy 4.1
+    </td>
+      <td align="center" width="96">
+      <a href="#macropower-tech">
+        <img src="images/keyboard.png" width="68" height="48" alt="Python" />
+      </a>
+      <br>Clavier
+    </td>
+    
+</table>
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+At first make sur to have the following software installed on your computer:
+
+* Arduino IDE (https://www.arduino.cc/en/software)
+
+Make sur to install the following libraries:
+
+* Keyboard (https://www.arduino.cc/reference/en/language/functions/usb/keyboard/)
+
+* USBHost (https://www.arduino.cc/reference/en/libraries/usbhost/)
 
 ### Installation
 

@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/YuToutCourt/KeyLogger_USB">
-    <img src="images/Arduino_Logo.svg.png" alt="Logo" width="220" height="200">
+    <img src="images/Arduino_Logo.svg.png" alt="Logo" width="100" height="80">
   </a>
 
   <h3 align="center">KeyLogger</h3>

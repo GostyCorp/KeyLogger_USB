@@ -6,6 +6,7 @@
 #define SHOW_KEYBOARD_DATA
 
 //Déclarer les objets USB
+File dataLog;
 USBHost myusb;
 USBHub hub1(myusb);
 KeyboardController keyboard1(myusb);
@@ -16,16 +17,7 @@ USBHIDParser hid1(myusb);
 USBHIDParser hid2(myusb);
 USBHIDParser hid3(myusb);
 
-//Définir les variables
-uint8_t keyboard_modifiers = 0;
-#ifdef KEYBOARD_INTERFACE
-  uint8_t keyboard_last_leds = 0;
-#elif !defined(SHOW_KEYBOARD_DATA)
-  #Warning: "USB type does not have Serial, so turning on SHOW_KEYBOARD_DATA"
-  #define SHOW_KEYBOARD_DATA
-#endif
 
-//Méthode appelée une seule fois au démarrage du programme
 void setup() {
   //Initialiser le port série si SHOW_KEYBOARD_DATA est défini
   #ifdef SHOW_KEYBOARD_DATA
@@ -53,7 +45,6 @@ void setup() {
 
 //Méthode appelée en boucle
 void loop() {
-  //Effectuer les tâches USB
   myusb.Task();
 }
 
@@ -61,23 +52,25 @@ void loop() {
 //Définir les variables pour la surveillance des périphériques USB et HID
 #ifdef SHOW_KEYBOARD_DATA
 //Définir les pilotes USB à surveiller
-USBDriver *usb_drivers[] = {&hub1, &hid1, &hid2, &hid3, &bluet};
-const int num_usb_drivers = sizeof(usb_drivers) / sizeof(usb_drivers[0]);
-const char *usb_driver_names[num_usb_drivers] = {"Hub1", "HID1" , "HID2", "HID3", "BlueTooth"};
-bool usb_driver_active[num_usb_drivers] = {false, false, false, false, false};
-
+USBDriver *drivers[] = {&hub1, &hid1, &hid2, &hid3, &bluet};
+#define CNT_DEVICES (sizeof(drivers)/sizeof(drivers[0]))
+const char * driver_names[CNT_DEVICES] = {"Hub1", "HID1" , "HID2", "HID3", "BlueTooth"};
+bool driver_active[CNT_DEVICES] = {false, false, false};
 //Définir les pilotes HID à surveiller
-USBHIDInput *hid_drivers[] = {&keyboard1};
-const int num_hid_drivers = sizeof(hid_drivers) / sizeof(hid_drivers[0]);
-const char *hid_driver_names[num_hid_drivers] = {"KB"};
-bool hid_driver_active[num_hid_drivers] = {false};
+// Lets also look at HID Input devices
+USBHIDInput *hiddrivers[] = { &keyboard1 };
+#define CNT_HIDDEVICES (sizeof(hiddrivers) / sizeof(hiddrivers[0]))
+const char *hid_driver_names[CNT_DEVICES] = { "KB" };
+bool hid_driver_active[CNT_DEVICES] = { false };
+
 
 //Définir les pilotes BTHID à surveiller
-BTHIDInput *bthid_drivers[] = {&keyboard1};
-const int num_bthid_drivers = sizeof(bthid_drivers) / sizeof(bthid_drivers[0]);
-const char *bthid_driver_names[num_bthid_drivers] = {"KB(BT)"};
-bool bthid_driver_active[num_bthid_drivers] = {false};
+BTHIDInput *bthiddrivers[] = {&keyboard1};
+#define CNT_BTHIDDEVICES (sizeof(bthiddrivers)/sizeof(bthiddrivers[0]))
+const char * bthid_driver_names[CNT_HIDDEVICES] = {"KB(BT)"};
+bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #endif
+
 
 
 void OnPress(int key) {
@@ -87,7 +80,7 @@ void OnPress(int key) {
                                      "PDN", "HOME", "END", "F1", "F2", "F3", "F4", "F5",
                                      "F6", "F7", "F8", "F9", "F10", "F11", "F12"
                                 };
-                                
+
   static const size_t numSpecialKeys = sizeof(specialKeys) / sizeof(specialKeys[0]);
   
   if (key == KEYD_ENTER || key == KEYD_RETURN) {

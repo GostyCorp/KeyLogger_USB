@@ -5,16 +5,14 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/Arduino_Logo.svg.png" alt="Logo" width="120" height="80">
+  <a href="https://github.com/YuToutCourt/KeyLogger_USB">
+    <img src="images/Arduino_Logo.svg.png" alt="Logo" width="220" height="200">
   </a>
 
   <h3 align="center">KeyLogger</h3>
@@ -22,14 +20,14 @@
   <p align="center">
     A KeyLogger USB, with Arduino
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/YuToutCourt/KeyLogger_USB"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/YuToutCourt/KeyLogger_USB">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/YuToutCourt/KeyLogger_USB/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/YuToutCourt/KeyLogger_USB/issues">Request Feature</a>
   </p>
 </div>
 
@@ -66,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](images/branchement.jpg)
+<img src="images/branchement.jpg" alt="Logo" width="120" height="80">
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
@@ -158,7 +156,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [ ] Chinese
     - [ ] Spanish
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/YuToutCourt/KeyLogger_USB/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -222,18 +220,15 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[contributors-shield]: https://img.shields.io/github/contributors/YuToutCourt/KeyLogger_USB?style=for-the-badge
+[contributors-url]: https://github.com/YuToutCourt/KeyLogger_USB/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/YuToutCourt/KeyLogger_USB.svg?style=for-the-badge
+[forks-url]: https://github.com/YuToutCourt/KeyLogger_USB/network/members
+[stars-shield]: https://img.shields.io/github/stars/YuToutCourt/KeyLogger_USB.svg?style=for-the-badge
+[stars-url]: https://github.com/YuToutCourt/KeyLogger_USB/stargazers
+[issues-shield]: https://img.shields.io/github/issues/YuToutCourt/KeyLogger_USB.svg?style=for-the-badge
+[issues-url]: https://github.com/YuToutCourt/KeyLogger_USB/issues
+
 [product-screenshot]: images/screenshot.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/

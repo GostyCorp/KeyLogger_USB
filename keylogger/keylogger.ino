@@ -33,6 +33,7 @@ void setup()
 
 void loop()
 {
+  Keyboard.print("Hello World "); 
   myusb.Task();
 }
 
@@ -60,9 +61,9 @@ void OnPress(int key)
 	switch (key)
   {
     case KEYD_UP       : Serial.print("UP"); break;
-    case KEYD_DOWN    : Serial.print("DN"); break;
+    case KEYD_DOWN     : Serial.print("DN"); break;
     case KEYD_LEFT     : Serial.print("LEFT"); break;
-    case KEYD_RIGHT   : Serial.print("RIGHT"); break;
+    case KEYD_RIGHT    : Serial.print("RIGHT"); break;
     case KEYD_INSERT   : Serial.print("Ins"); break;
     case KEYD_DELETE   : Serial.print("Del"); break;
     case KEYD_PAGE_UP  : Serial.print("PUP"); break;

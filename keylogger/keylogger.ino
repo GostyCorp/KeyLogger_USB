@@ -109,7 +109,3 @@ void printDebugOutput(size_t dataSize, uint64_t usedSize, uint64_t totalSize) {
     Serial.print(totalSizeInMB);
     Serial.println(" Mo.");
 }
-
-
-       
-

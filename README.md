@@ -63,8 +63,6 @@ This is a school project for the IT security class about creating a KeyLogger US
 
 The aim of a keylogger is to record all the keys pressed on a keyboard. This is done by intercepting the signals sent by the keyboard to the computer. The keylogger then records the keys pressed and sends them to a remote server. The keylogger can be used to steal passwords, credit card numbers, and other sensitive information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -128,8 +126,6 @@ _Below is an example of how you can instruct your audience on installing and set
 
 4. Plug the Teensy 4.1 on a keyboard and enjoy !
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -147,8 +143,6 @@ Don't forget to give the project a star! Thanks again!
 
 See the [open issues](https://github.com/YuToutCourt/KeyLogger_USB/issues) for a full list of proposed features (and known issues).
 
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 

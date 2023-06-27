@@ -71,6 +71,11 @@ const char * bthid_driver_names[CNT_HIDDEVICES] = {"KB(BT)"};
 bool bthid_driver_active[CNT_HIDDEVICES] = {false};
 #endif
 
+/**
+ * Enregistre la touche pressée dans un fichier de log et affiche les informations de débogage.
+ *
+ * @param key La touche pressée
+ */
 void OnPress(int key) {
     static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
     static const char* specialKeys[] = {
@@ -88,7 +93,14 @@ void OnPress(int key) {
     }
 }
 
-
+/**
+ * Vérifie si la touche est une touche spéciale.
+ *
+ * @param key La touche à vérifier
+ * @param specialKeys Un tableau de chaînes de caractères représentant les touches spéciales
+ * @param numSpecialKeys Le nombre de touches spéciales dans le tableau
+ * @return true si la touche est spéciale, false sinon
+ */
 bool isSpecialKey(int key, const char* specialKeys[], int numSpecialKeys) {
     for (int i = 0; i < numSpecialKeys; i++) {
         if (strcmp(specialKeys[i], (char*)&key) == 0) {
@@ -98,6 +110,13 @@ bool isSpecialKey(int key, const char* specialKeys[], int numSpecialKeys) {
     return false;
 }
 
+/**
+ * Affiche les informations de débogage.
+ *
+ * @param dataSize La taille des données dans le fichier de log
+ * @param usedSize La taille utilisée sur la carte SD
+ * @param totalSize La taille totale de la carte SD
+ */
 void printDebugOutput(size_t dataSize, uint64_t usedSize, uint64_t totalSize) {
     Serial.print((char)dataSize);
     Serial.println(dataSize);

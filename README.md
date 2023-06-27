@@ -74,19 +74,19 @@ This project was built with the following technologies and libraries:
 <table>
   <tr>
     <td align="center" width="96">
-      <a href="#macropower-tech">
+      <a href="https://www.arduino.cc/en/software">
         <img src="images/Arduino_Logo.svg.png" width="68" height="58" alt="C#" />
       </a>
       <br>Ardunio
     </td>
     <td align="center" width="96">
-      <a href="#macropower-tech">
+      <a href="https://www.arduino.cc/reference/en/language/functions/usb/keyboard/">
         <img src="images/teensy.png" width="68" height="48" alt="Python" />
       </a>
       <br>Teensy 4.1
     </td>
       <td align="center" width="96">
-      <a href="#macropower-tech">
+      <a href="https://www.arduino.cc/reference/en/libraries/usbhost/">
         <img src="images/keyboard.png" width="68" height="48" alt="Python" />
       </a>
       <br>Clavier

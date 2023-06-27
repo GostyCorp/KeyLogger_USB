@@ -130,7 +130,7 @@ _Below is an example of how you can instruct your audience on installing and set
 3. Transfer the code into the Teensy 4.1
 
 4. See the logs 
-<img src="images/activer.png" width="290" height="150"/>
+<img src="images/activer.png" width="500" height="100"/>
 
 <!-- CONTRIBUTING -->
 ## Contributing

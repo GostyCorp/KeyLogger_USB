@@ -113,12 +113,11 @@ bool isSpecialKey(int key, const char* specialKeys[], int numSpecialKeys) {
 /**
  * Affiche les informations de débogage.
  *
- * @param dataSize La taille des données dans le fichier de log
+ * @param dataSize La taille du ficher de log
  * @param usedSize La taille utilisée sur la carte SD
  * @param totalSize La taille totale de la carte SD
  */
 void printDebugOutput(size_t dataSize, uint64_t usedSize, uint64_t totalSize) {
-    Serial.print((char)dataSize);
     Serial.println(dataSize);
     uint64_t usedSizeInMB = usedSize / (1024 * 1024);
     uint64_t totalSizeInMB = totalSize / (1024 * 1024);

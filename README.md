@@ -122,10 +122,15 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    Arduino IDE -> Tools -> Manage Libraries
    ```
+
+<img src="images/select_driver.png" width="250" height="170"/>
+<img src="images/select_port1.png" width="250" height="170"/>
+<img src="images/select_port2.png" width="290" height="150"/>
+
 3. Transfer the code into the Teensy 4.1
 
-4. Plug the Teensy 4.1 on a keyboard and enjoy !
-
+4. See the logs 
+<img src="images/activer.png" width="290" height="150"/>
 
 <!-- CONTRIBUTING -->
 ## Contributing

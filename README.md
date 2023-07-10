@@ -23,11 +23,9 @@
     <a href="https://github.com/YuToutCourt/KeyLogger_USB"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/YuToutCourt/KeyLogger_USB">View Demo</a>
     ·
     <a href="https://github.com/YuToutCourt/KeyLogger_USB/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/YuToutCourt/KeyLogger_USB/issues">Request Feature</a>
+    .
   </p>
 </div>
 

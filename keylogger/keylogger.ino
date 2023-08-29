@@ -5,51 +5,45 @@
 #include "USBHost_t36.h"
 #include "SD.h"
 
-// You can have this one only output to the USB type Keyboard and
-// not show the keyboard data on Serial...
 #define SHOW_KEYBOARD_DATA
 
 File dataLog;
 USBHost myusb;
 USBHub hub1(myusb);
 KeyboardController keyboard1(myusb);
-//BluetoothController bluet(myusb, true, "0000");   // Version does pairing to device
-BluetoothController bluet(myusb);  // version assumes it already was paired
+BluetoothController bluet(myusb);
 
 USBHIDParser hid1(myusb);
 USBHIDParser hid2(myusb);
 USBHIDParser hid3(myusb);
 
-uint8_t keyboard_modifiers = 0;  // try to keep a reasonable value
+uint8_t keyboard_modifiers = 0; 
 #ifdef KEYBOARD_INTERFACE
 uint8_t keyboard_last_leds = 0;
 #elif !defined(SHOW_KEYBOARD_DATA)
 #Warning : "USB type does not have Serial, so turning on SHOW_KEYBOARD_DATA"
-#define SHOW_KEYBOARD_DATA
-#endif
 
 void setup() {
-  if (!SD.begin(BUILTIN_SDCARD)) {
-    Serial.println("SD card failed, or not present");
-  } else {
-    dataLog = SD.open("dataLog.txt", FILE_WRITE);
-  }
-#ifdef SHOW_KEYBOARD_DATA
-  while (!Serial)
-    ;  // wait for Arduino Serial Monitor
-  Serial.println("\n\nUSB Host Keyboard forward and Testing");
-  Serial.println(sizeof(USBHub), DEC);
-#endif
-  myusb.begin();
+  	if (!SD.begin(BUILTIN_SDCARD)) {
+		Serial.println("SD card failed, or not present");
+  	} else {
+    	dataLog = SD.open("dataLog.txt", FILE_WRITE);
+  	}
+	#ifdef SHOW_KEYBOARD_DATA
+  	while (!Serial)
+	;
+	Serial.println("\n\nUSB Host Keyboard forward and Testing");
+  	Serial.println(sizeof(USBHub), DEC);
+	#endif
+  	myusb.begin();
 
-  // Only needed to display...
-#ifdef SHOW_KEYBOARD_DATA
-  keyboard1.attachPress(OnPress);
-#endif
-  keyboard1.attachRawPress(OnRawPress);
-  keyboard1.attachRawRelease(OnRawRelease);
-  keyboard1.attachExtrasPress(OnHIDExtrasPress);
-  keyboard1.attachExtrasRelease(OnHIDExtrasRelease);
+	#ifdef SHOW_KEYBOARD_DATA
+  	keyboard1.attachPress(OnPress);
+	#endif
+  	keyboard1.attachRawPress(OnRawPress);
+  	keyboard1.attachRawRelease(OnRawRelease);
+  	keyboard1.attachExtrasPress(OnHIDExtrasPress);
+  	keyboard1.attachExtrasRelease(OnHIDExtrasRelease);
 }
 
 
@@ -79,31 +73,21 @@ void OnHIDExtrasRelease(uint32_t top, uint16_t key) {
     Keyboard.release(0XE400 | key);
   }
 #endif
-#ifdef SHOW_KEYBOARD_DATA
-  // Serial.print("HID (");
-  // Serial.print(top, HEX);
-  // Serial.print(") key release:");
-  // Serial.println(key, HEX);
-#endif
 }
 
 void OnRawPress(uint8_t keycode) {
 #ifdef KEYBOARD_INTERFACE
   if (keyboard_leds != keyboard_last_leds) {
-    //Serial.printf("New LEDS: %x\n", keyboard_leds);
     keyboard_last_leds = keyboard_leds;
     keyboard1.LEDS(keyboard_leds);
   }
   if (keycode >= 103 && keycode < 111) {
-    // one of the modifier keys was pressed, so lets turn it
-    // on global..
     uint8_t keybit = 1 << (keycode - 103);
     keyboard_modifiers |= keybit;
     Keyboard.set_modifier(keyboard_modifiers);
   } else {
     if (keyboard1.getModifiers() != keyboard_modifiers) {
 #ifdef SHOW_KEYBOARD_DATA
-      // Serial.printf("Mods mismatch: %x != %x\n", keyboard_modifiers, keyboard1.getModifiers());
 #endif
       keyboard_modifiers = keyboard1.getModifiers();
       Keyboard.set_modifier(keyboard_modifiers);
@@ -112,18 +96,12 @@ void OnRawPress(uint8_t keycode) {
   }
 #endif
 #ifdef SHOW_KEYBOARD_DATA
-  // Serial.print("OnRawPress keycode: ");
-  // Serial.print(keycode, HEX);
-  // Serial.print(" Modifiers: ");
-  // Serial.println(keyboard_modifiers, HEX);
   static File dataLog = SD.open("dataLog.txt", FILE_WRITE);
 #endif
 }
 void OnRawRelease(uint8_t keycode) {
 #ifdef KEYBOARD_INTERFACE
   if (keycode >= 103 && keycode < 111) {
-    // one of the modifier keys was pressed, so lets turn it
-    // on global..
     uint8_t keybit = 1 << (keycode - 103);
     keyboard_modifiers &= ~keybit;
     Keyboard.set_modifier(keyboard_modifiers);
@@ -131,24 +109,14 @@ void OnRawRelease(uint8_t keycode) {
     Keyboard.release(0XF000 | keycode);
   }
 #endif
-#ifdef SHOW_KEYBOARD_DATA
-  // Serial.print("OnRawRelease keycode: ");
-  // Serial.print(keycode, HEX);
-  // Serial.print(" Modifiers: ");
-  // Serial.println(keyboard1.getModifiers(), HEX);
-#endif
 }
 
-//=============================================================
-// Device and Keyboard Output To Serial objects...
-//=============================================================
 #ifdef SHOW_KEYBOARD_DATA
 USBDriver *drivers[] = { &hub1, &hid1, &hid2, &hid3, &bluet };
 #define CNT_DEVICES (sizeof(drivers) / sizeof(drivers[0]))
 const char *driver_names[CNT_DEVICES] = { "Hub1", "HID1", "HID2", "HID3", "BlueTooth" };
 bool driver_active[CNT_DEVICES] = { false, false, false };
 
-// Lets also look at HID Input devices
 USBHIDInput *hiddrivers[] = { &keyboard1 };
 #define CNT_HIDDEVICES (sizeof(hiddrivers) / sizeof(hiddrivers[0]))
 const char *hid_driver_names[CNT_DEVICES] = { "KB" };
@@ -197,11 +165,7 @@ void ShowUpdatedDeviceListInfo() {
         if (psz && *psz) Serial.printf("  product: %s\n", psz);
         psz = hiddrivers[i]->serialNumber();
         if (psz && *psz) Serial.printf("  Serial: %s\n", psz);
-        // Note: with some keyboards there is an issue that they may not output in a format understand
-        // either as in boot format or in a HID format that is recognized.  In that case you
-        // can try forcing the keyboard into boot mode.
         if (hiddrivers[i] == &keyboard1) {
-          // example Gigabyte uses N key rollover which should now work, but...
         }
       }
     }
@@ -228,13 +192,11 @@ void ShowUpdatedDeviceListInfo() {
       }
     }
   }
-
 #endif
 }
 
 #ifdef SHOW_KEYBOARD_DATA
 void OnPress(int key) {
-  // Serial.print("key '");
   switch (key) {
     case KEYD_UP: dataLog.print("UP"); break;
     case KEYD_DOWN: dataLog.print("DN"); break;
@@ -261,28 +223,11 @@ void OnPress(int key) {
     default: dataLog.print((char)key); break;
   }
   dataLog.flush();
-  // Serial.print("'  ");
-  // Serial.print(key);
-  // Serial.print(" MOD: ");
-  // Serial.print(keyboard1.getModifiers(), HEX);
-  // Serial.print(" OEM: ");
-  // Serial.print(keyboard1.getOemKey(), HEX);
-  // Serial.print(" LEDS: ");
-  // Serial.println(keyboard1.LEDS(), HEX);
-  //Serial.print("key ");
-  //Serial.print((char)keyboard1.getKey());
-  //Serial.print("  ");
-  //Serial.print((char)keyboard2.getKey());
-  //Serial.println();
 }
 #endif
 
 void ShowHIDExtrasPress(uint32_t top, uint16_t key) {
 #ifdef SHOW_KEYBOARD_DATA
-  // Serial.print("HID (");
-  // Serial.print(top, HEX);
-  // Serial.print(") key press:");
-  // Serial.print(key, HEX);
   if (top == 0xc0000) {
     switch (key) {
       case 0x20: dataLog.print(" - +10"); break;
@@ -510,6 +455,5 @@ void ShowHIDExtrasPress(uint32_t top, uint16_t key) {
     }
     dataLog.flush();
   }
-  // Serial.println();
 #endif
 }

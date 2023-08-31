@@ -23,11 +23,9 @@
     <a href="https://github.com/YuToutCourt/KeyLogger_USB"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/YuToutCourt/KeyLogger_USB">View Demo</a>
     ·
     <a href="https://github.com/YuToutCourt/KeyLogger_USB/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/YuToutCourt/KeyLogger_USB/issues">Request Feature</a>
+    .
   </p>
 </div>
 
@@ -123,9 +121,7 @@ _Below is an example of how you can instruct your audience on installing and set
    Arduino IDE -> Tools -> Manage Libraries
    ```
 
-<img src="images/select_driver.png" width="250" height="170"/>
-<img src="images/select_port1.png" width="250" height="170"/>
-<img src="images/select_port2.png" width="290" height="150"/>
+<img src="images/select_driver.png" width="250" height="170"/><img src="images/select_port1.png" width="250" height="170"/><img src="images/select_port2.png" width="290" height="150"/>
 
 3. Transfer the code into the Teensy 4.1
 

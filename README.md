@@ -132,6 +132,10 @@ _Below is an example of how you can instruct your audience on installing and set
 4. See the logs 
 <img src="images/activer.png" width="500" height="100"/>
 
+
+5. Tools setup
+<img src="images/tools_setup.png" >
+
 <!-- CONTRIBUTING -->
 ## Contributing
 
